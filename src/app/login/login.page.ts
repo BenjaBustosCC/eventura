@@ -18,6 +18,16 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  onLoginButtonPressed() {
+    if(this.sessionManager.performLogin(this.email, this.password)) {
+      this.router.navigate(['/home'], {queryParams: { email: this.email }});
+    } else {
+      this.email=''
+      this.password=''
+      alert('Las credenciales ingresadas son inválidas.')
+    }
+  }
+
   onRegisterButtonPressed() {
     this.router.navigate(['/register'])
   }

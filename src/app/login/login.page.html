@@ -6,16 +6,16 @@
   <div class="input-container">
     <ion-list>
       <ion-item>
-        <ion-input placeholder="Correo electrónico" type="email"></ion-input>
+        <ion-input placeholder="Correo electrónico" type="email" [(ngModel)]="email"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Contraseña" type="password"></ion-input>
+        <ion-input placeholder="Contraseña" type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
     </ion-list>
   </div>
 
   <div class="button-container">
-    <ion-button expand="block">Acceder</ion-button>
+    <ion-button expand="block" (click)="onLoginButtonPressed()">Acceder</ion-button>
   </div>
 
   <div>
