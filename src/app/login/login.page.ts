@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SessionManager } from 'src/managers/SessionManager';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,16 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private sessionManager: SessionManager) { }
+
+    email: string = '';
+    user: string = '';
+    password: string = '';
 
   ngOnInit() {
   }
 
+  onRegisterButtonPressed() {
+    this.router.navigate(['/register'])
+  }
 }
