@@ -27,5 +27,15 @@
 }
 
 ion-toolbar{
-  height: 11vh;
+  height: 12vh;
 }
+
+ion-searchbar{
+  --border-radius: 30px;
+  margin: 0 auto;
+  width: 72vw;
+  height: 12vh;
+  --icon-color: #BB271A; 
+}
+
+
