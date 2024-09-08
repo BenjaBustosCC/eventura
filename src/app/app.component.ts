@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+import {homeOutline, locationOutline, duplicateOutline, personOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    addIcons({
+      'home-outline':homeOutline,
+      'location-outline': locationOutline,
+      'duplicate-outline': duplicateOutline,
+      'person-outline': personOutline
+    })
+  }
 }

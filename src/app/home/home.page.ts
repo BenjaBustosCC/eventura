@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+import {homeOutline, locationOutline, duplicateOutline, personOutline } from 'ionicons/icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +10,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private router: Router) {
+    addIcons({
+      'home-outline':homeOutline,
+      'location-outline': locationOutline,
+      'duplicate-outline': duplicateOutline,
+      'person-outline': personOutline
+    })
+  }
 }
+
