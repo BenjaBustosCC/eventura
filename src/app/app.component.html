@@ -1,3 +1,12 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-header *ngIf="showNavBar">
+  <ion-toolbar>
+    <ion-searchbar placeholder="Buscar.."></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-router-outlet></ion-router-outlet> <!-- Para cargar las vistas -->

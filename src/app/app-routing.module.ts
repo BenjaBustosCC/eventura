@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [ 
+const routes: Routes = [
   {
     path: 'splash',
-    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
+    loadChildren: () => import('./splash/splash.module').then(m => m.SplashPageModule)
   },
   {
     path: '',
@@ -12,33 +12,17 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  
-  {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'maps',
-    loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
-  },
-  {
-    path: 'add-event',
-    loadChildren: () => import('./add-event/add-event.module').then( m => m.AddEventPageModule)
-  },
-  
-
-
+    path:'tabs',
+    loadChildren:() => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  }
 ];
 
 @NgModule({
