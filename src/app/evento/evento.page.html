@@ -1,17 +1,15 @@
 <ion-content>
   <div style="position: relative;">
-    <!-- Botón de retroceso con círculo relleno -->
-    <ion-button fill="solid" shape="round" style="position: absolute; top: 10px; left: 10px; z-index: 10; width: 40px; height: 40px; border-radius: 50%;" color="primary">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
+    <ion-button  class="custom-button" shape="round" fill="solid" (click)="onBackButtonPressed()">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+        </ion-button>
 
-    <!-- Imagen del evento -->
-    <img src="../../assets/img/canto.png" alt="Canto a la Vida - Homenaje Sinfónico" style="width: 100%;" />
+        <img src="../../assets/img/canto.png" alt="Canto a la Vida - Homenaje Sinfónico" style="width: 100%;" />
   </div>
 
-  <!-- Contenido debajo de la imagen -->
+
   <ion-card-header>
-    <ion-card-title>Canto a la Vida - Homenaje Sinfónico a los tres íconos del Folklore Chileno</ion-card-title>
+    <ion-card-title style="font-size: 18px;">Canto a la Vida - Homenaje Sinfónico a los tres íconos del Folklore Chileno</ion-card-title>
   </ion-card-header>
   
   <ion-card-content>
