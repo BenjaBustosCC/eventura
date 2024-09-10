@@ -18,5 +18,8 @@ export class HomePage {
       'person-outline': personOutline
     })
   }
+  onEventButtonPressed() {
+    this.router.navigate(['/evento'])
+  }
 }
 
