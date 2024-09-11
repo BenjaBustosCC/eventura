@@ -22,7 +22,9 @@ export class AppComponent {
 
     this.router.events.subscribe(() =>{
       const currentRoute = this.router.url;
-      if (currentRoute.includes('/addEvent') || currentRoute.includes('/profile')|| currentRoute.includes('/splash') || currentRoute.includes('/login') || currentRoute.includes('/register') || currentRoute.includes('/evento')) {
+      if (currentRoute.includes('/addEvent') || currentRoute.includes('/profile')|| 
+          currentRoute.includes('/splash') || currentRoute.includes('/login') || 
+          currentRoute.includes('/register') || currentRoute.includes('/evento')) {
         this.showNavBar = false;
       } else {
         this.showNavBar = true;
