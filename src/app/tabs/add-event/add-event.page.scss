@@ -1,0 +1,32 @@
+ion-header{
+    background-color: #ffffff;
+    height: 10%;
+}
+
+ion-button{
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    --background: #BB271A;
+    
+}
+
+.image-upload-container {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+
+.event-icon{
+    color: #FF8207;
+}
+  
