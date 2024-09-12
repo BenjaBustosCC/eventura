@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 
 export class SessionManager {
@@ -9,14 +9,14 @@ export class SessionManager {
     private readonly temporaryEmail: string = 'hola@hola.com';
     private readonly temporaryUser: string = 'usuario';
     private readonly temporaryPass: string = 'pass';
-    
+
 
     performLogin(email: string, password: string): boolean {
-        if(email == this.temporaryEmail && password == this.temporaryPass) {
+        if (email == this.temporaryEmail && password == this.temporaryPass) {
             return true;
         } else {
             return false;
-        }  
+        }
     }
 
     performLogout() {

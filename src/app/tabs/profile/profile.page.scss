@@ -1,0 +1,43 @@
+.ProfilePicture {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+    box-shadow: 0 4px 8px rgba(255, 130, 7, 0.6);
+}
+
+ion-avatar {
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20%;
+    margin-top: 10%;
+    //position: relative;
+    //Para que el botón se coloque relativo al avatar 
+    //display: inline-block;
+}
+
+//podria quitarlo, la config de la cuenta esta en administracion
+//.overlay-button {
+//    z-index: 1;
+//    border: 1px solid white;
+//    border-radius: 50px;
+//    position: absolute;
+//    transform: translate(70%, 70%);
+//}
+
+ion-avatar img {
+    object-fit: cover;
+}
+
+ion-item-divider {
+    background-color: white;
+    margin-top: 5%;
+}
+
+.ArrowSettingsProfile {
+    color: #FF8207;
+}
