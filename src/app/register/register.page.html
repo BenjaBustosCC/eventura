@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-img src="../../assets/img/logo_blanco.png" alt="Logo eventura"> </ion-img>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="input-container">
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Correo electrónico" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Nombre de usuario" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Contraseña" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Verificar contraseña" type="password"></ion-input>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+  <div class="button-container">
+    <ion-button expand="block" (click)="onRegisterButtonPressed()">Crear cuenta</ion-button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <ion-button shape="round" (click)="onBackButtonPressed()">
+          <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <h1 style="margin-top: 10px; color: black;">
+          Nuevo evento
+        </h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card>
+  </ion-card>
+</ion-header>
+
+<ion-content style="margin-top: 4vh;">
+  <ion-card class="image-card" style="text-align: center;">
+    <ion-card-content>
+      <div class="image-upload-container">
+        <ion-icon class="AddPicture" name="add-outline" style="font-size: 40px;"></ion-icon>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-item>
+    <ion-label position="stacked">Título</ion-label>
+    <ion-input placeholder="Título del evento"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Descripción</ion-label>
+    <ion-textarea placeholder="Descripción del evento"></ion-textarea>
+  </ion-item>
+
+  <ion-list lines="full">
+    <ion-item>
+      <ion-icon class="event-icon" slot="start" name="location-outline"></ion-icon>
+      <ion-label>Agregar una ubicación</ion-label>
+      <ion-icon class="ArrowAddEvent" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="event-icon" slot="start" name="calendar-outline"></ion-icon>
+      <ion-label>Agregar una fecha</ion-label>
+      <ion-icon class="ArrowAddEvent" slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="event-icon" slot="start" name="time-outline"></ion-icon>
+      <ion-label>Agregar un horario</ion-label>
+      <ion-icon class="ArrowAddEvent"  slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+<div class="btn-container">
+  <ion-button class="btnUpload" >
+    Subir
+    <ion-ripple-effect></ion-ripple-effect> <!--Creo que el ripple no funciona pq le falta funcionalidad al boton VER DESPUES-->
+  </ion-button>
+</div>
+
+
+</ion-content>

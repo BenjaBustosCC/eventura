@@ -1,0 +1,17 @@
+ion-toolbar {
+    ion-searchbar {
+        --border-radius: 30px;
+        margin: 0 auto;
+        width: 72vw;
+        height: 12vh;
+        --icon-color: #BB271A;
+    }
+}
+
+ion-icon{
+    color: #BB271A;
+    &.tab-selected{
+        color: #191013;
+    }
+}
+

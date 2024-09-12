@@ -1,0 +1,57 @@
+ion-header {
+    background-color: #ffffff;
+    height: 10%;
+}
+
+ion-button {
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    --background: #BB271A;
+}
+
+.image-card{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-upload-container {
+    width: 150px;
+    height: 200px;
+    border: 1px solid white; //blanco cuadrado de adentro
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.event-icon {
+    color: #FF8207;
+}
+
+.ArrowAddEvent{
+    color: #FF8207;
+}
+
+.AddPicture{
+    color: #FF8207;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnUpload {
+    width: 200px;
+    height: 20px;
+    margin-top: 5%;
+    border-radius: 20%;
+    --ripple-color: #191013; //ver pq no funciona este ripple ctm
+}
+
