@@ -3,6 +3,7 @@ import { addIcons } from 'ionicons';
 import {homeOutline, locationOutline, duplicateOutline, personOutline } from 'ionicons/icons';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,5 +22,8 @@ export class HomePage {
   onEventButtonPressed() {
     this.router.navigate(['/evento'])
   }
+
+
+  
 }
 

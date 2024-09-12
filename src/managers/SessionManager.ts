@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class SessionManager {
 
-    private readonly temporaryEmail: string = 'hola@hola.com';
+    private readonly temporaryEmail: string = 'hola@hello.com';
     private readonly temporaryUser: string = 'usuario';
     private readonly temporaryPass: string = 'pass';
 

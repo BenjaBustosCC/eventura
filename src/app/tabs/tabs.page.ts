@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
@@ -8,15 +9,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TabsPage implements OnInit {
 
-  email: string= '';
+  email: string = '';
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     this.route.queryParams.subscribe(params => {
-      this.email=params['email'] ||'';
+      this.email = params['email'] || '';
     })
   }
 
 }
+

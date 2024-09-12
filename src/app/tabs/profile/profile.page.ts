@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,7 @@ export class ProfilePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
