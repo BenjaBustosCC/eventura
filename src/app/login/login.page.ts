@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   onLoginButtonPressed() {
     if (this.sessionManager.performLogin(this.email, this.password)) {
       const userName = this.sessionManager.getUser();  
-      this.router.navigate(['/tabs/home'], {
+      this.router.navigate(['/tabs'], {
         queryParams: { user: userName}
       });
     } else {

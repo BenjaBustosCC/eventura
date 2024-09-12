@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { SessionManager } from 'src/managers/SessionManager';
 
 @Component({
   selector: 'app-tabs',
@@ -11,12 +10,9 @@ export class TabsPage implements OnInit {
 
   user: string = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private sessionManager: SessionManager) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.user = params['user'];
-    });
+  ngOnInit() {
+    this.user = this.sessionManager.getUser();
   }
 }
-

@@ -22,8 +22,8 @@ export class SessionManager {
     performLogout() {
         //TODO
     }
-    getUser(): string | null {
-        return this.temporaryUser; // Retornar el usuario actual
+    getUser(): string {
+        return this.temporaryUser;
       }
 
     

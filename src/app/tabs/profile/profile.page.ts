@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { SessionManager } from 'src/managers/SessionManager';  // Importar el SessionManager
 
 @Component({
   selector: 'app-profile',
@@ -8,10 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  user: string = '';
+
+  constructor(private sessionManager: SessionManager) { } 
 
   ngOnInit() {
-
+    this.user = this.sessionManager.getUser();  
   }
 
 }
+
