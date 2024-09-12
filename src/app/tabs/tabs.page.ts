@@ -9,16 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TabsPage implements OnInit {
 
-  email: string = '';
+  user: string = '';
 
   constructor(private route: ActivatedRoute) { }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.email = params['email'] || '';
-    })
+      this.user = params['user'];
+    });
   }
-
 }
 

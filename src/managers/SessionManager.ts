@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class SessionManager {
 
     private readonly temporaryEmail: string = 'hola@hello.com';
-    private readonly temporaryUser: string = 'usuario';
+    private readonly temporaryUser: string = 'benji';
     private readonly temporaryPass: string = 'pass';
 
 
@@ -22,4 +22,9 @@ export class SessionManager {
     performLogout() {
         //TODO
     }
+    getUser(): string | null {
+        return this.temporaryUser; // Retornar el usuario actual
+      }
+
+    
 }
