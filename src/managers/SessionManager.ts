@@ -24,7 +24,7 @@ export class SessionManager {
     }
     getUser(): string {
         return this.temporaryUser;
-      }
+}
 
     
 }
