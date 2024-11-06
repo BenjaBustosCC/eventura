@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionManager } from 'src/managers/SessionManager';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ export class LoginPage implements OnInit {
     email: string = '';
     user: string = '';
     password: string = '';
+
+  firebaseService =inject(FirebaseService);
 
   ngOnInit() {
   }
