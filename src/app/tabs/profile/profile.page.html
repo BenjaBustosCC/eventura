@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Perfil de {{user}}</ion-title>
+    <ion-title>Perfil de {{ user?.nombre || 'Nombre no disponible' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -42,7 +42,7 @@
 
     <ion-item>
       <ion-label>Cerrar sesión</ion-label>
-      <ion-icon class="ArrowSettingsProfile" slot="end" name="chevron-forward-outline"></ion-icon>
+      <ion-icon class="ArrowSettingsProfile" slot="end" name="chevron-forward-outline" (click)="onSignOutButtonPressed()"></ion-icon>
     </ion-item>
 
     <ion-item-divider> Soporte</ion-item-divider>
