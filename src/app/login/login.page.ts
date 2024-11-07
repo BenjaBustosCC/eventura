@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SessionManager } from 'src/managers/SessionManager';
+import { UserLoginUseCase } from '../use-cases/user-login.use-case';
+import { CancelAlertService } from 'src/managers/CancelAlertService';
+
 
 @Component({
   selector: 'app-login',
@@ -9,28 +11,42 @@ import { SessionManager } from 'src/managers/SessionManager';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private sessionManager: SessionManager) { }
+  constructor(
+    private router: Router, 
+    private userLoginUseCase: UserLoginUseCase,
+    private alert: CancelAlertService // Inyecta el servicio de alertas
 
+  ) { }
+
+  
     email: string = '';
-    user: string = '';
     password: string = '';
 
   ngOnInit() {
   }
+  
+  async onLoginButtonPressed() {
+    const result = await this.userLoginUseCase.performLogin(this.email, this.password);
 
-  onLoginButtonPressed() {
-    if (this.sessionManager.performLogin(this.email, this.password)) {
-      const userName = this.sessionManager.getUser();  
-      this.router.navigate(['/tabs'], {
-        queryParams: { user: userName}
-      });
+    if (result.success) {
+      this.alert.showAlert(
+        'Login exitoso',
+        'Has iniciado sesión correctamente.',
+        () => {
+          this.router.navigate(['/tabs/home']); // Navegar a inicio cuando el login sea exitoso
+        }
+      );
     } else {
-      this.email = '';
-      this.password = '';
-      alert('Las credenciales ingresadas son inválidas.');
+      this.alert.showAlert(
+        'Error',
+        result.message,
+        () => {
+          this.router.navigate(['/splash']); 
+        }
+      );
     }
   }
-  
+
 
   onRegisterButtonPressed() {
     this.router.navigate(['/register'])
