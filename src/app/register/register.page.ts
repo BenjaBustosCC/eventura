@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserRegistrationUseCase } from '../use-cases/user-registration.use-case';
 import { CancelAlertService } from 'src/managers/CancelAlertService';
@@ -18,7 +17,6 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private userRegistrationUseCase: UserRegistrationUseCase,
-    private navCtrl: NavController, 
     private router: Router,
     private alert: CancelAlertService
   ) { }
@@ -26,9 +24,6 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  goBack() {
-    this.navCtrl.back();
-  }
  /* onRegisterButtonPressed() {
     this.router.navigate(['/login'])
   }*/
