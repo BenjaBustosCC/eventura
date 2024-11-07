@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { UserLogoutUseCase } from '../use-cases/user-logout.user-case';
 import { CancelAlertService } from 'src/managers/CancelAlertService';
 import { StorageService } from 'src/managers/StorageService';
 
@@ -13,7 +12,6 @@ export class TabsPage implements OnInit {
 
   constructor(
 
-    //private logoutUseCase: UserLogoutUseCase,
     private cancelAlertService: CancelAlertService,
     private storageService: StorageService
   ) {}
