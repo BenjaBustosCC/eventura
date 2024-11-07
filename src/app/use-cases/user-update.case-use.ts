@@ -42,18 +42,27 @@ export class UserUpdateUseCase {
     }
     }
     async performDeleteAccount(uid: string): Promise<{ success: boolean; message: string }> {
-        try {
-            await this.firestore.collection('users').doc(uid).delete();
-            // Sign out from Firebase
-            await this.fireAuth.signOut();
-
-            // Clear all data from Ionic Storage
-            await this.storageService.clear();
-
-      return { success: true, message: 'Usuario eliminado con éxito' };
-    } catch (error: any) {
-      return { success: false, message: `Error al eliminar el usuario: ${error.message}` };
-    }
-}
-
-}   
+      try {
+          // Eliminar el documento del usuario en Firestore
+          await this.firestore.collection('users').doc(uid).delete();
+  
+          // Obtener el usuario autenticado
+          const user = await this.fireAuth.currentUser;
+          if (user) {
+              // Eliminar al usuario de Firebase Authentication
+              await user.delete();
+          } else {
+              return { success: false, message: 'No se encontró el usuario autenticado para eliminar' };
+          }
+  
+          // Cerrar sesión de Firebase
+          await this.fireAuth.signOut();
+  
+          // Limpiar todos los datos de Ionic Storage
+          await this.storageService.clear();
+  
+          return { success: true, message: 'Usuario eliminado con éxito' };
+      } catch (error: any) {
+          return { success: false, message: `Error al eliminar el usuario: ${error.message}` };
+      }
+  }}
