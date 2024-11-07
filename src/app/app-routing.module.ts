@@ -22,18 +22,20 @@ const routes: Routes = [
   {
     path:'tabs',
     loadChildren:() => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'evento/:id',  // Asegúrate de que esta ruta esté configurada para recibir el ID
+    loadChildren: () => import('./evento/evento.module').then(m => m.EventoPageModule),
   },  {
-    path: 'evento',
-    loadChildren: () => import('./evento/evento.module').then( m => m.EventoPageModule)
-  }
+    path: 'pw-update',
+    loadChildren: () => import('./pw-update/pw-update.module').then( m => m.PwUpdatePageModule)
+  },
 
 
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

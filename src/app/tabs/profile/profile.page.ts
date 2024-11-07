@@ -38,4 +38,7 @@ export class ProfilePage implements OnInit {
       () => { }
     );
   }
-}
+  onUpdatePasswordPressed() {
+    this.router.navigate(['/pw-update'])
+  
+}}

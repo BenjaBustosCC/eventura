@@ -1,0 +1,24 @@
+
+<ion-content [fullscreen]="true">
+  <div class="input-container">
+    <ion-list>
+      <ion-item>
+        <ion-input placeholder="Contraseña actual" type="password" [(ngModel)]="userCurrentPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Nueva contraseña" type="password" [(ngModel)]="userPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Verificar nueva contraseña" type="password" [(ngModel)]="userRePassword"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="button-container">
+    <ion-button expand="block" (click)="onPasswordUpdateButtonPressed()">Acceder</ion-button>
+  </div>
+  <div>
+    <p (click)="onHomeButtonPressed()">
+      Volver al Home. 
+    </p>
+  </div>
+</ion-content>

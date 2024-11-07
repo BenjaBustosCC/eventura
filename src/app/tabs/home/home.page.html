@@ -1,19 +1,15 @@
 <ion-content>
   <div class="card-container">
-    <!-- Usamos *ngFor para iterar sobre la lista de eventos -->
-    <ion-card *ngFor="let event of events" (click)="onEventButtonPressed()">
-      <div class="img-container">
-        <!-- Mostrar la imagen del evento -->
-        <img [src]="event.image" alt="foto evento" />
+    <ion-card *ngFor="let event of events">
+      <div class="img-container"  (click)="onEventButtonPressed(event.id)">
+        <img [src]="event.imagen" alt="{{ event.nombre }} "  />
       </div>
       <ion-card-header>
-        <!-- Mostrar el nombre del evento -->
-        <ion-card-title>{{ event.name }}</ion-card-title>
+        <ion-card-title>{{ event.nombre }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <!-- Mostrar la descripción del evento -->
-        {{ event.description }}
-      </ion-card-content>
+        {{ event.descripcion }}
+      </ion-card-content> 
     </ion-card>
   </div>
 </ion-content>
