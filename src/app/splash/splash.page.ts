@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/managers/StorageService';
 
 @Component({
   selector: 'app-splash',
@@ -8,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class SplashPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private storageService: StorageService) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -16,3 +18,23 @@ export class SplashPage implements OnInit {
     }, 3000)
   }
 }
+
+//esto no funciona :(
+//  async ionViewDidEnter(){
+//    this.checkSession()
+//  }
+//
+//  async checkSession(){
+//    const user = await this.storageService.get('user');
+//    if (user){
+//      setTimeout(()=>{
+//        this.router.navigate(['/home']);
+//      }, 4000)
+//    } else {
+//      setTimeout(() =>{
+//        this.router.navigate(['/login']);
+//      }, 4000)
+//    }
+//  }
+//}
+  
