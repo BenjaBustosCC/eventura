@@ -33,7 +33,7 @@ export class PwUpdatePage implements OnInit {
     } else {
       console.log('Usuario encontrado:', this.user); // verifica los datos obtenidos
       
-      this.userPassword = ''; // deje los campos vacios ya que no se deberian mostrar las contraseñas
+      this.userPassword = ''; // deja los campos vacios ya que no se deberian mostrar las contraseñas
       this.userRePassword = ''; 
      
     }

@@ -19,18 +19,16 @@ export class UserRegistrationUseCase {
       const user = userCredential.user;
 
       if (user) {
-        // obtener el uid del usuario
+ 
         const uid = user.uid;
-   
-
-        // crear un objeto con los datos del usuario
+  
         const userData = {
           uid: uid,
           email: email,
           nombre: nombre,
         };
 
-        // guarda la información del usuario en Firestore, al llamar a collection 'users' crea una coleccion de users si no existe, crea un documento con el uid y le agrega el userdata al documento
+        
         await this.firestore.collection('users').doc(uid).set(userData);
       }
 

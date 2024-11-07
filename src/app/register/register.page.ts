@@ -24,15 +24,11 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
- /* onRegisterButtonPressed() {
-    this.router.navigate(['/login'])
-  }*/
-
     async onRegisterButtonPressed() {
       // Llama al caso de uso para manejar el registro
       const result = await this.userRegistrationUseCase.performRegistration(this.email,this.nombre, this.password);
 
-      // Si hay un mensaje de éxito, navega a otra vista
+      // Si hay un mensaje de éxito, navega al login
       if (result.success) {
         this.alert.showAlert(
           'Registro exitoso',

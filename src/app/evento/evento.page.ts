@@ -9,29 +9,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./evento.page.scss'],
 })
 export class EventoPage implements OnInit {
-  eventId: string | null = null;  // Para guardar el ID del evento
-  event: any = null;  // Para guardar los datos del evento
+  eventId: string | null = null;   
+  event: any = null;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,  // Para acceder a los parámetros de la URL
-    private firestore: AngularFirestore  // Para interactuar con Firestore
+    private route: ActivatedRoute, 
+    private firestore: AngularFirestore  
   ) {}
 
   ngOnInit() {
     // Obtener el ID del evento desde la URL
     this.route.paramMap.subscribe(params => {
-      this.eventId = params.get('id');  // 'id' es el parámetro que definimos en la ruta
+      this.eventId = params.get('id');  
       if (this.eventId) {
-        this.loadEvent(this.eventId);  // Cargar el evento desde Firestore
+        this.loadEvent(this.eventId);  
       }
     });
   }
 
-  // Método para cargar los datos del evento desde Firestore
   loadEvent(eventId: string) {
     this.firestore.collection('events').doc(eventId).valueChanges().subscribe(eventData => {
-      this.event = eventData;  // Asignamos los datos del evento al objeto 'event'
+      this.event = eventData; 
     });
   }
 
