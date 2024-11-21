@@ -1,15 +1,20 @@
 <ion-content>
   <div class="card-container">
     <ion-card *ngFor="let event of events">
-      <div class="img-container"  (click)="onEventButtonPressed(event.id)">
-        <img [src]="event.imagen" alt="{{ event.nombre }} "  />
+      <div class="img-container" (click)="onEventButtonPressed(event.id)">
+        <img [src]="event.imagen" alt="{{ event.nombre }}" />
       </div>
       <ion-card-header>
         <ion-card-title>{{ event.nombre }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         {{ event.descripcion }}
-      </ion-card-content> 
+      </ion-card-content>
+      <ion-icon
+        name="trash-outline"
+        class="delete-icon"
+        (click)="deleteEvent(event.id)"
+      ></ion-icon>
     </ion-card>
   </div>
 </ion-content>

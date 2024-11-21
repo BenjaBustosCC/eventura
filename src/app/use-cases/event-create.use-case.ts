@@ -8,7 +8,11 @@ export class EventService {
 
   constructor(private firestore: AngularFirestore) {}
 
-  async saveEvent(eventName: string, eventDescription: string, eventImage: string): Promise<{ success: boolean; message: string }> {
+  async saveEvent(
+    eventName: string,
+    eventDescription: string,
+    eventImage: string
+  ): Promise<{ success: boolean; message: string; eventId?: string }> {
     try {
       // Crear un objeto con los datos del evento
       const eventData = {
@@ -19,9 +23,12 @@ export class EventService {
       };
 
       // Guardar el evento en Firestore en la colección "events"
-      await this.firestore.collection('events').add(eventData);
+      const docRef = await this.firestore.collection('events').add(eventData);
 
-      return { success: true, message: "Evento guardado con éxito" };
+      // Agregar el ID al evento (opcional, si lo necesitas en el documento)
+      await docRef.update({ id: docRef.id });
+
+      return { success: true, message: 'Evento guardado con éxito', eventId: docRef.id };
 
     } catch (error: any) {
       // Manejo de errores y mensajes
