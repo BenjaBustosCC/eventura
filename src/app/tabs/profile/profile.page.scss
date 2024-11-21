@@ -20,15 +20,6 @@ ion-avatar {
     //display: inline-block;
 }
 
-//podria quitarlo, la config de la cuenta esta en administracion
-//.overlay-button {
-//    z-index: 1;
-//    border: 1px solid white;
-//    border-radius: 50px;
-//    position: absolute;
-//    transform: translate(70%, 70%);
-//}
-
 ion-avatar img {
     object-fit: cover;
 }
@@ -40,4 +31,19 @@ ion-item-divider {
 
 .ArrowSettingsProfile {
     color: #FF8207;
+}
+
+.btnCambioPerfil{
+    color: violet;
+    z-index: 1;
+    border: 1px solid white;
+    border-radius: 50px;
+    position: absolute;
+    transform: translate(70%, 70%);
+}
+
+.btnEditFotoPerfil{
+    color:white;
+    border-radius: 50px;
+    
 }

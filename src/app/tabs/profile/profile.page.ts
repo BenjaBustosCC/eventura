@@ -5,6 +5,10 @@ import { CancelAlertService } from 'src/managers/CancelAlertService';
 import { StorageService } from 'src/managers/StorageService';
 import { UserUpdateUseCase } from 'src/app/use-cases/user-update.case-use';
 
+//capacitor camara
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -12,6 +16,7 @@ import { UserUpdateUseCase } from 'src/app/use-cases/user-update.case-use';
 })
 export class ProfilePage implements OnInit {
   user: any;
+  profileImage: string | undefined;
 
   constructor(
     private router: Router, 
@@ -79,4 +84,21 @@ export class ProfilePage implements OnInit {
       );
     }
   }
+  //metodo del capcitor de la camara
+async changeProfilePicture() {
+  try {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera,
+    });
+
+    this.profileImage = image.dataUrl;
+    console.log('Imagen capturada:', this.profileImage);
+  } catch (error) {
+    console.error('Error al capturar la imagen:', error);
+  }
 }
+}
+
