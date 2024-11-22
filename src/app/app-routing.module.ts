@@ -26,7 +26,8 @@ const routes: Routes = [
   {
     path: 'evento/:id',  // Asegúrate de que esta ruta esté configurada para recibir el ID
     loadChildren: () => import('./evento/evento.module').then(m => m.EventoPageModule),
-  },  {
+  },
+  {
     path: 'pw-update',
     loadChildren: () => import('./pw-update/pw-update.module').then( m => m.PwUpdatePageModule)
   },

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventService } from '../use-cases/event-manage.use-case';  // Asegúrate de que la ruta sea correcta
+import { EventService } from '../use-cases/event-read.use-case';
 import { Event } from '../use-cases/event-manage.use-case';  // Asegúrate de que la ruta sea correcta
 
 @Component({
@@ -8,7 +8,7 @@ import { Event } from '../use-cases/event-manage.use-case';  // Asegúrate de qu
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
 })
-export class EventoDetallePage implements OnInit {
+export class EventoPage implements OnInit {
   event: Event | null = null; // Variable para almacenar el evento
 
   constructor(
