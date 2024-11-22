@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EventService } from '../use-cases/event-read.use-case';
+import { EventReadUseCase } from '../use-cases/event-read.use-case';
 import { Event } from '../use-cases/event-manage.use-case';  // Asegúrate de que la ruta sea correcta
 
 @Component({
@@ -13,7 +13,7 @@ export class EventoPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventReadUseCase: EventReadUseCase
   ) {}
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class EventoPage implements OnInit {
     const eventId = this.route.snapshot.paramMap.get('id');
     if (eventId) {
       // Llamar al servicio para obtener los datos del evento
-      this.eventService.getEventById(eventId).subscribe(
+      this.eventReadUseCase.getEventById(eventId).subscribe(
         (event) => {
           this.event = event; // Guardar los datos en la variable
         },

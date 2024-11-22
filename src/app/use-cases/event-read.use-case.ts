@@ -8,7 +8,7 @@ import { Event } from './event-manage.use-case';
 @Injectable({
   providedIn: 'root',
 })
-export class EventService {
+export class EventReadUseCase {
   constructor(private firestore: AngularFirestore) {}
 
     // Método para obtener todos los eventos desde Firestore

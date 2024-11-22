@@ -5,7 +5,7 @@ import { getAuth } from 'firebase/auth';
 @Injectable({
   providedIn: 'root',
 })
-export class EventService {
+export class EventCreateUseCase {
 
   constructor(private firestore: AngularFirestore) {}
 
