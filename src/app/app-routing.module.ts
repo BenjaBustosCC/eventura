@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'pw-update',
     loadChildren: () => import('./pw-update/pw-update.module').then( m => m.PwUpdatePageModule)
   },
+  {
+    path: 'event-management',
+    loadChildren: () => import('./event-management/event-management.module').then( m => m.EventManagementPageModule)
+  },
 
 
 ];

@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
 
   // Cargar los eventos desde Firestore
   loadEvents() {
-    this.eventService.getEvents().subscribe(events => {
+    this.eventService.getAllEvents().subscribe(events => {
       this.events = events; // Guarda los eventos con sus IDs
       console.log('Eventos obtenidos:', events); // Verifica si los IDs están presentes
     });
@@ -41,19 +41,4 @@ export class HomePage implements OnInit {
     this.router.navigate([`/evento/${eventId}`]); // Pasa el ID en la URL
   }
 
-  // Método para eliminar un evento
-  async deleteEvent(eventId: string) {
-    try {
-      const response = await this.eventService.deleteEvent(eventId);
-      if (response.success) {
-        // Eliminar el evento de la lista localmente
-        this.events = this.events.filter(event => event.id !== eventId);
-        console.log(response.message);
-      } else {
-        console.error(response.message);
-      }
-    } catch (error) {
-      console.error('Error al eliminar el evento:', error);
-    }
-  }
 }

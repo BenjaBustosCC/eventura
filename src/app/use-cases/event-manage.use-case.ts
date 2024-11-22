@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';  
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { getAuth } from 'firebase/auth';
+
 
 export interface Event {
   id?: string; // ID opcional
@@ -18,20 +20,46 @@ export interface Event {
 export class EventService {
   constructor(private firestore: AngularFirestore) {}
 
-  // Método para obtener todos los eventos incluyendo su ID
+  // Método para obtener todos los eventos por id
   getEvents(): Observable<Event[]> {
-    return this.firestore.collection('events').snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
-          const data = a.payload.doc.data() as Event; // Asegúrate de que sea del tipo Event
-          const id = a.payload.doc.id; // ID del documento
-          return { id, ...data }; // Combina ID y datos
-        })
-      )
-    );
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      throw new Error('Usuario no autenticado');
+    }
+  
+    return this.firestore
+      .collection('events', (ref) => ref.where('userId', '==', currentUser.uid))
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Event;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
   }
 
-  // Método para eliminar un evento por su ID
+  // Método para obtener todos los eventos sin filtrar por usuario
+  getAllEvents(): Observable<Event[]> {
+    return this.firestore
+      .collection('events') // No se aplica filtro alguno
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Event;
+            const id = a.payload.doc.id;
+            return { id, ...data }; // Combina el ID con los datos del evento
+          })
+        )
+      );
+  }
+
+  // Método para eliminar un evento por su id
   async deleteEvent(id: string): Promise<{ success: boolean; message: string }> {
     try {
       await this.firestore.collection('events').doc(id).delete();

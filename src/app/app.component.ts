@@ -24,7 +24,7 @@ export class AppComponent {
       const currentRoute = this.router.url;
       if (currentRoute.includes('/addEvent') || currentRoute.includes('/profile')|| 
           currentRoute.includes('/splash') || currentRoute.includes('/login') || 
-          currentRoute.includes('/register') || currentRoute.includes('/evento')) {
+          currentRoute.includes('/register') || currentRoute.includes('/evento')||currentRoute.includes('/event-management')) {
         this.showNavBar = false;
       } else {
         this.showNavBar = true;

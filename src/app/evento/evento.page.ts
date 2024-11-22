@@ -1,40 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/compat/firestore';  
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { EventService } from '../use-cases/event-manage.use-case';  // Asegúrate de que la ruta sea correcta
+import { Event } from '../use-cases/event-manage.use-case';  // Asegúrate de que la ruta sea correcta
 
 @Component({
   selector: 'app-evento',
   templateUrl: './evento.page.html',
   styleUrls: ['./evento.page.scss'],
 })
-export class EventoPage implements OnInit {
-  eventId: string | null = null;   
-  event: any = null;
+export class EventoDetallePage implements OnInit {
+  event: Event | null = null; // Variable para almacenar el evento
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute, 
-    private firestore: AngularFirestore  
+    private route: ActivatedRoute,
+    private eventService: EventService
   ) {}
 
   ngOnInit() {
-    // Obtener el ID del evento desde la URL
-    this.route.paramMap.subscribe(params => {
-      this.eventId = params.get('id');  
-      if (this.eventId) {
-        this.loadEvent(this.eventId);  
-      }
-    });
-  }
-
-  loadEvent(eventId: string) {
-    this.firestore.collection('events').doc(eventId).valueChanges().subscribe(eventData => {
-      this.event = eventData; 
-    });
+    // Obtener el ID desde la URL
+    const eventId = this.route.snapshot.paramMap.get('id');
+    if (eventId) {
+      // Llamar al servicio para obtener los datos del evento
+      this.eventService.getEventById(eventId).subscribe(
+        (event) => {
+          this.event = event; // Guardar los datos en la variable
+        },
+        (error) => {
+          console.error('Error al obtener el evento:', error);
+        }
+      );
+    }
   }
 
   onBackButtonPressed() {
-    this.router.navigate(['/tabs/home']);  // Volver a la página de inicio
+    // Lógica para volver a la vista anterior
+    window.history.back();
   }
 }
