@@ -87,11 +87,13 @@ export class ProfilePage implements OnInit {
   }
 
   onUpdatePasswordPressed() {
+
     this.router.navigate(['/pw-update']);
   }
 
   async onDeleteAccountPressed() {
     // Obtener el usuario logueado del StorageService
+    
     this.user = await this.storageService.get('user');
     if (this.user && this.user.uid) {
       const uid = this.user.uid; 
