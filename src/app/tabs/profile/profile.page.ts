@@ -55,6 +55,7 @@ export class ProfilePage implements OnInit {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
+        quality: 50,
         allowEditing: false,
         resultType: CameraResultType.DataUrl,
         source: CameraSource.Camera,
@@ -62,8 +63,13 @@ export class ProfilePage implements OnInit {
   
       // Asegúrate de que image.dataUrl es una cadena antes de usarlo
       const imageDataUrl = image.dataUrl || ''; // Si es undefined, usa una cadena vacía
+      const imageDataUrl = image.dataUrl || '';
   
       this.profileImage = imageDataUrl; // Guarda la imagen como Base64
+      // Redimensiona y comprime la imagen a menos de 1MB
+      const compressedImageDataUrl = await this.compressImage(imageDataUrl, 1024); // Tamaño objetivo: 1MB
+  
+      this.profileImage = compressedImageDataUrl; // Guarda la imagen comprimida como Base64
   
       // Llama al servicio para actualizar la imagen
       await this.userUpdateUseCase.updateProfilePicture(imageDataUrl);
@@ -74,6 +80,53 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  
+  /**
+   * Comprime y redimensiona una imagen a un tamaño objetivo.
+   * @param dataUrl - La imagen en formato Base64.
+   * @param maxFileSizeKB - Tamaño máximo en KB.
+   * @returns La imagen comprimida en formato Base64.
+   */
+  private compressImage(dataUrl: string, maxFileSizeKB: number): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = dataUrl;
+  
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+  
+        // Ajusta las dimensiones del lienzo al tamaño de la imagen original
+        canvas.width = img.width;
+        canvas.height = img.height;
+  
+        // Dibuja la imagen en el lienzo
+        ctx?.drawImage(img, 0, 0);
+  
+        let quality = 0.9; // Comienza con calidad alta
+        let resultDataUrl = dataUrl;
+  
+        do {
+          // Intenta reducir el tamaño de la imagen ajustando la calidad
+          resultDataUrl = canvas.toDataURL('image/jpeg', quality);
+  
+          // Calcula el tamaño de la imagen en KB
+          const fileSizeKB = Math.round((resultDataUrl.length * 3) / 4 / 1024);
+  
+          if (fileSizeKB <= maxFileSizeKB) {
+            resolve(resultDataUrl);
+            return;
+          }
+  
+          quality -= 0.1; // Reduce la calidad para comprimir más
+        } while (quality > 0.1); // Detente si la calidad es demasiado baja
+  
+        reject(new Error('No se pudo comprimir la imagen a menos de ' + maxFileSizeKB + 'KB.'));
+      };
+  
+      img.onerror = (error) => reject(error);
+    });
+  }
   async onSignOutButtonPressed() {
     this.cancelAlertService.showAlert(
       'Cerrar sesión',
