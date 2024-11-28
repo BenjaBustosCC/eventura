@@ -53,5 +53,15 @@ img{
   width: 70vw;
 }
 
-
+.delete-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 24px;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+}
 

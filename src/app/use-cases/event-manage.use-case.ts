@@ -1,25 +1,75 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';  // Importa el servicio Firestore
+import { AngularFirestore } from '@angular/fire/compat/firestore';  
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { getAuth } from 'firebase/auth';
+
+
+export interface Event {
+  id?: string; // ID opcional
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+  userId: string;
+  createdAt: any; // Puede ser `Date` o `firebase.firestore.Timestamp`
+}
 
 @Injectable({
   providedIn: 'root',
 })
-export class EventService {
-
+export class EventManagetUseCase {
   constructor(private firestore: AngularFirestore) {}
 
-  // Método para obtener todos los eventos desde Firestore
-  getEvents(): Observable<any[]> {
-    return this.firestore.collection('events').valueChanges();  // Devuelve un observable con los eventos
+  // Método para obtener todos los eventos por id
+  getEvents(): Observable<Event[]> {
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+  
+    if (!currentUser) {
+      throw new Error('Usuario no autenticado');
+    }
+  
+    return this.firestore
+      .collection('events', (ref) => ref.where('userId', '==', currentUser.uid))
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Event;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
   }
 
-  // Método para obtener un solo evento por su ID
-  getEventById(id: string): Observable<any> {
-    return this.firestore.collection('events').doc(id).valueChanges();  // Devuelve un observable con los datos del evento
+  // Método para obtener todos los eventos sin filtrar por usuario
+  getAllEvents(): Observable<Event[]> {
+    return this.firestore
+      .collection('events') // No se aplica filtro alguno
+      .snapshotChanges()
+      .pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Event;
+            const id = a.payload.doc.id;
+            return { id, ...data }; // Combina el ID con los datos del evento
+          })
+        )
+      );
   }
 
-  deleteEvent(eventId: string): Promise<void> {
-    return this.firestore.collection('events').doc(eventId).delete();
+  updateEvent(id: string, data: Partial<Event>): Promise<void> {
+    return this.firestore.collection('events').doc(id).update(data);
+  }
+  
+  // Método para eliminar un evento por su id
+  async deleteEvent(id: string): Promise<{ success: boolean; message: string }> {
+    try {
+      await this.firestore.collection('events').doc(id).delete();
+      return { success: true, message: 'Evento eliminado con éxito' };
+    } catch (error: any) {
+      return { success: false, message: `Error al eliminar el evento: ${error.message}` };
+    }
   }
 }
