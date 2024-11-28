@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { homeOutline, locationOutline, duplicateOutline, personOutline } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { EventManagetUseCase } from 'src/app/use-cases/event-manage.use-case';
+import { EventService } from 'src/app/use-cases/event-manage.use-case';
 
 @Component({
   selector: 'app-event-management',
@@ -14,7 +14,7 @@ export class EventManagementPage implements OnInit {
   events: any[] = []; 
   constructor(
     private router: Router,
-    private eventManagetUseCase: EventManagetUseCase
+    private eventService: EventService
   ) {
     addIcons({
       'home-outline': homeOutline,
@@ -30,7 +30,7 @@ export class EventManagementPage implements OnInit {
 
 
   loadEvents() {
-    this.eventManagetUseCase.getEvents().subscribe(events => {
+    this.eventService.getEvents().subscribe(events => {
       this.events = events; 
       console.log('Eventos obtenidos:', events); 
     });
@@ -38,11 +38,15 @@ export class EventManagementPage implements OnInit {
 
   onBackButtonPressed() {
     this.router.navigate(['/tabs/profile'])}
-  
-  
+
+  onEventButtonPressed(eventId: string) {
+    this.router.navigate([`/evento/${eventId}`]);
+  }
+
+
   async deleteEvent(eventId: string) {
     try {
-      const response = await this.eventManagetUseCase.deleteEvent(eventId);
+      const response = await this.eventService.deleteEvent(eventId);
       if (response.success) {
  
         this.events = this.events.filter(event => event.id !== eventId);
@@ -54,9 +58,4 @@ export class EventManagementPage implements OnInit {
       console.error('Error al eliminar el evento:', error);
     }
   }
-
-  onEditButtonPressed(eventId: string) {
-    this.router.navigate([`/event-edit/${eventId}`]); // Pasa el ID en la URL
-  }
-
 }

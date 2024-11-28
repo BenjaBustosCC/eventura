@@ -17,7 +17,7 @@ export interface Event {
 @Injectable({
   providedIn: 'root',
 })
-export class EventManagetUseCase {
+export class EventService {
   constructor(private firestore: AngularFirestore) {}
 
   // Método para obtener todos los eventos por id
@@ -59,10 +59,6 @@ export class EventManagetUseCase {
       );
   }
 
-  updateEvent(id: string, data: Partial<Event>): Promise<void> {
-    return this.firestore.collection('events').doc(id).update(data);
-  }
-  
   // Método para eliminar un evento por su id
   async deleteEvent(id: string): Promise<{ success: boolean; message: string }> {
     try {

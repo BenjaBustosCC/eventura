@@ -35,11 +35,6 @@ const routes: Routes = [
     path: 'event-management',
     loadChildren: () => import('./event-management/event-management.module').then( m => m.EventManagementPageModule)
   },
-  {
-    path: 'event-edit/:id', // Ruta dinámica con el parámetro `id`
-    loadChildren: () => import('./event-edit/event-edit.module').then(m => m.EventEditPageModule),
-  },
-
 
 
 ];

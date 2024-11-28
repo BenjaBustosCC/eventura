@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { addIcons } from 'ionicons';
 import { homeOutline, locationOutline, duplicateOutline, personOutline } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { EventManagetUseCase } from 'src/app/use-cases/event-manage.use-case';
+import { EventService } from 'src/app/use-cases/event-manage.use-case';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
 
   constructor(
     private router: Router,
-    private eventManagetUseCase: EventManagetUseCase // Inyectas el servicio de eventos
+    private eventService: EventService // Inyectas el servicio de eventos
   ) {
     addIcons({
       'home-outline': homeOutline,
@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
 
   // Cargar los eventos desde Firestore
   loadEvents() {
-    this.eventManagetUseCase.getAllEvents().subscribe(events => {
+    this.eventService.getAllEvents().subscribe(events => {
       this.events = events; // Guarda los eventos con sus IDs
       console.log('Eventos obtenidos:', events); // Verifica si los IDs están presentes
     });
