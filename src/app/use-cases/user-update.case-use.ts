@@ -65,4 +65,26 @@ export class UserUpdateUseCase {
       } catch (error: any) {
           return { success: false, message: `Error al eliminar el usuario: ${error.message}` };
       }
-  }}
+  }
+  async updateProfilePicture(imageBase64: string) {
+    try {
+      // Obtener el usuario autenticado
+      const user = await this.fireAuth.currentUser;
+      if (user) {
+        const uid = user.uid; // Obtener el uid del usuario autenticado
+
+        // Actualizar la imagen de perfil en Firestore
+        await this.firestore.collection('users').doc(uid).update({
+          imagen: imageBase64 // Guardar la imagen como Base64 en Firestore
+        });
+
+        console.log('Imagen de perfil actualizada exitosamente');
+      } else {
+        throw new Error('No hay usuario autenticado');
+      }
+    } catch (error) {
+      console.error('Error al actualizar la imagen de perfil:', error);
+      throw error; // Re-lanzar el error
+    }
+  }
+}
