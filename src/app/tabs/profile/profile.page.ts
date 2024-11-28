@@ -54,7 +54,6 @@ export class ProfilePage implements OnInit {
   async changeProfilePicture() {
     try {
       const image = await Camera.getPhoto({
-        quality: 90,
         quality: 50,
         allowEditing: false,
         resultType: CameraResultType.DataUrl,
@@ -62,17 +61,14 @@ export class ProfilePage implements OnInit {
       });
   
       // Asegúrate de que image.dataUrl es una cadena antes de usarlo
-      const imageDataUrl = image.dataUrl || ''; // Si es undefined, usa una cadena vacía
       const imageDataUrl = image.dataUrl || '';
   
-      this.profileImage = imageDataUrl; // Guarda la imagen como Base64
       // Redimensiona y comprime la imagen a menos de 1MB
       const compressedImageDataUrl = await this.compressImage(imageDataUrl, 1024); // Tamaño objetivo: 1MB
   
       this.profileImage = compressedImageDataUrl; // Guarda la imagen comprimida como Base64
   
       // Llama al servicio para actualizar la imagen
-      await this.userUpdateUseCase.updateProfilePicture(imageDataUrl);
       await this.userUpdateUseCase.updateProfilePicture(compressedImageDataUrl);
   
       console.log('Imagen de perfil actualizada en la base de datos');
@@ -80,7 +76,6 @@ export class ProfilePage implements OnInit {
       console.error('Error al capturar o actualizar la imagen:', error);
     }
   }
-
   
   /**
    * Comprime y redimensiona una imagen a un tamaño objetivo.
