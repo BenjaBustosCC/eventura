@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventService } from 'src/app/use-cases/event-create.use-case'; // Asegúrate de importar el servicio EventService
+import { EventCreateUseCase } from 'src/app/use-cases/event-create.use-case';
 
 @Component({
   selector: 'app-add-event',
@@ -15,7 +15,7 @@ export class AddEventPage implements OnInit {
 
   constructor(
     private router: Router,
-    private eventService: EventService // Inyecta el servicio EventService
+    private eventCreateUseCase: EventCreateUseCase // Inyecta el servicio EventService
   ) {}
 
   ngOnInit() {}
@@ -36,7 +36,7 @@ export class AddEventPage implements OnInit {
   async saveEvent() {
     if (this.eventName && this.eventDescription && this.eventImage) {
       try {
-        const result = await this.eventService.saveEvent(this.eventName, this.eventDescription, this.eventImage);
+        const result = await this.eventCreateUseCase.saveEvent(this.eventName, this.eventDescription, this.eventImage);
         if (result.success) {
           // Redirigir a la página principal
           this.router.navigate(['/tabs/home']);

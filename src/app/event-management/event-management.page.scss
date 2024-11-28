@@ -1,0 +1,100 @@
+#container {
+    text-align: center;
+  
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado entre tarjetas */
+    padding: 10px;
+  }
+  
+  .event-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ff9800; /* Fondo naranja */
+    border-radius: 10px;
+    padding: 10px;
+    height: 120px; /* Alto fijo */
+    margin-bottom: 10px; /* Espaciado entre tarjetas */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  .img-container img {
+    width: 100px; /* Ancho fijo para la imagen */
+    height: 100px; /* Alto fijo para la imagen */
+    border-radius: 8px; /* Bordes redondeados */
+    object-fit: cover; /* Imagen escalada manteniendo proporción */
+  }
+  
+  .details-container {
+    flex: 1; /* Ocupa el espacio disponible */
+    margin-left: 15px; /* Espaciado con respecto a la imagen */
+    display: flex;
+    flex-direction: column; /* Alinea título y descripción en columna */
+    justify-content: center; /* Centra verticalmente el contenido */
+    overflow: hidden; /* Oculta contenido desbordado */
+  }
+  
+  .details-container ion-card-title {
+    font-size: 18px; /* Tamaño del título */
+    font-weight: bold;
+    color: #000; /* Color negro para el texto */
+    white-space: nowrap; /* Evita saltos de línea */
+    overflow: hidden; /* Oculta texto largo */
+    text-overflow: ellipsis; /* Trunca texto largo con "..." */
+    margin: 0; /* Quita márgenes */
+  }
+  
+  .details-container ion-card-content {
+    font-size: 14px; /* Tamaño de fuente reducido */
+    color: #444; /* Color gris oscuro */
+    white-space: nowrap; /* Evita saltos de línea */
+    overflow: hidden; /* Oculta texto desbordado */
+    text-overflow: ellipsis; /* Trunca texto largo con "..." */
+    margin: 0; /* Quita márgenes */
+  }
+  
+  .icon-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Espaciado entre íconos */
+  }
+  
+  .edit-icon {
+    font-size: 24px;
+    color: #4caf50; /* Verde para editar */
+    cursor: pointer;
+  }
+  
+  .delete-icon {
+    font-size: 24px;
+    color: #f44336; /* Rojo para eliminar */
+    cursor: pointer;
+  }
+  
