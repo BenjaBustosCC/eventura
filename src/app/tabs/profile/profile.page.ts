@@ -4,8 +4,8 @@ import { UserLogoutUseCase } from 'src/app/use-cases/user-logout.use-case';
 import { CancelAlertService } from 'src/managers/CancelAlertService';
 import { StorageService } from 'src/managers/StorageService';
 import { UserUpdateUseCase } from 'src/app/use-cases/user-update.case-use';
+import { UserService } from 'src/app/use-cases/user-read.use-case';
 
-//capacitor camara
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
@@ -24,15 +24,53 @@ export class ProfilePage implements OnInit {
     private cancelAlertService: CancelAlertService,
     private storageService: StorageService,
     private userUpdateUseCase: UserUpdateUseCase,
-    private alert: CancelAlertService
-
+    private alert: CancelAlertService,
+    private userService: UserService // Inyectar el servicio de usuario
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadUserData();
+  }
+  /**
+   * Cargar los datos del usuario y asignarlos a las variables del componente.
+   */
+  async loadUserData() {
+    const userData = await this.userService.getUserData(); // Llamar al servicio para obtener datos del usuario
+
+    if (userData) {
+      this.user = userData;
+      this.profileImage = userData.imagen || 'assets/default-profile.png'; // Asignar imagen si existe
+    } else {
+      console.log('No se pudieron cargar los datos del usuario.');
+      this.profileImage = 'assets/default-profile.png'; // Imagen por defecto
+    }
+  }
+
   async ionViewDidEnter() {
-    this.user = await this.storageService.get('user');
-    if (!this.user) {
-      console.log('No se encontraron datos del usuario.');
+    // Si quieres que se recarguen los datos cada vez que la vista entre en foco, usa este método.
+    await this.loadUserData();
+  }
+
+  async changeProfilePicture() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera,
+      });
+  
+      // Asegúrate de que image.dataUrl es una cadena antes de usarlo
+      const imageDataUrl = image.dataUrl || ''; // Si es undefined, usa una cadena vacía
+  
+      this.profileImage = imageDataUrl; // Guarda la imagen como Base64
+  
+      // Llama al servicio para actualizar la imagen
+      await this.userUpdateUseCase.updateProfilePicture(imageDataUrl);
+  
+      console.log('Imagen de perfil actualizada en la base de datos');
+    } catch (error) {
+      console.error('Error al capturar o actualizar la imagen:', error);
     }
   }
 
@@ -47,18 +85,16 @@ export class ProfilePage implements OnInit {
       () => { }
     );
   }
+
   onUpdatePasswordPressed() {
-    this.router.navigate(['/pw-update'])
-  
-}
- async onDeleteAccountPressed() {
-    // obtener el user logeado del storageservice
+    this.router.navigate(['/pw-update']);
+  }
+
+  async onDeleteAccountPressed() {
+    // Obtener el usuario logueado del StorageService
     this.user = await this.storageService.get('user');
-    // verificar que haya user y uid
     if (this.user && this.user.uid) {
-    // extraer el uid del usuario
       const uid = this.user.uid; 
-    // enviar el uid al caso de uso de delete account  
       const result = await this.userUpdateUseCase.performDeleteAccount(uid);
 
       if (result.success) {
@@ -84,21 +120,4 @@ export class ProfilePage implements OnInit {
       );
     }
   }
-  //metodo del capcitor de la camara
-async changeProfilePicture() {
-  try {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Camera,
-    });
-
-    this.profileImage = image.dataUrl;
-    console.log('Imagen capturada:', this.profileImage);
-  } catch (error) {
-    console.error('Error al capturar la imagen:', error);
-  }
 }
-}
-
