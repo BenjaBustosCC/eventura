@@ -73,6 +73,7 @@ export class ProfilePage implements OnInit {
   
       // Llama al servicio para actualizar la imagen
       await this.userUpdateUseCase.updateProfilePicture(imageDataUrl);
+      await this.userUpdateUseCase.updateProfilePicture(compressedImageDataUrl);
   
       console.log('Imagen de perfil actualizada en la base de datos');
     } catch (error) {
