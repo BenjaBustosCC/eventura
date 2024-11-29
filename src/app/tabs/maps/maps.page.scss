@@ -1,3 +1,7 @@
 .map-container{
     margin-top: 14vh;
   }
+
+  .map-container.visible{
+    opacity: 1;
+  }

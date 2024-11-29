@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  googleMapsApiKey: 'AIzaSyAAOa1-_x4NYFBUw5FcNijjW8rptGFguiE',
   firebaseConfig: {
     apiKey: "AIzaSyCHPG3bGdFdvgLVdzxiPsYV-k252RpvGIM",
     authDomain: "eventura-app.firebaseapp.com",
