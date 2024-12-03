@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 
-declare var google: any; // Para evitar errores de TypeScript con Google Maps
+declare var google: any;
 
 @Component({
   selector: 'app-maps',
@@ -9,18 +9,18 @@ declare var google: any; // Para evitar errores de TypeScript con Google Maps
   styleUrls: ['./maps.page.scss'],
 })
 export class MapsPage implements OnInit {
-  map: any; // Variable para el mapa
-  location: any = {}; // Para almacenar la ubicación actual
+  map: any; 
+  location: any = {}; 
 
   constructor() {}
 
   ngOnInit() {
-    this.initMap(); // Inicializar el mapa al cargar la página
+    this.initMap(); 
   }
 
   async initMap() {
-    // Establecer una ubicación inicial por defecto
-    const defaultLatLng = new google.maps.LatLng(-33.4489, -70.6693); // Santiago, Chile
+    //ubicación inicial por defecto (Santiago)
+    const defaultLatLng = new google.maps.LatLng(-33.4489, -70.6693);
 
     const mapOptions = {
       center: defaultLatLng,
@@ -33,15 +33,15 @@ export class MapsPage implements OnInit {
 
   async getPosition() {
     try {
-      // Obtener la ubicación actual
+      //ubicación actual
       const position = await Geolocation.getCurrentPosition({
         enableHighAccuracy: true,
       });
 
-      // Guardar la ubicación actual
+      //guarda la ubicación actual
       this.location = position.coords;
 
-      // Actualizar el centro del mapa
+      //actualiza el centro del mapa
       const latLng = new google.maps.LatLng(
         this.location.latitude,
         this.location.longitude
@@ -49,7 +49,7 @@ export class MapsPage implements OnInit {
 
       this.map.setCenter(latLng);
 
-      // Agregar un marcador en la ubicación actual
+      //agrega un marcador en la ubicación actual
       new google.maps.Marker({
         position: latLng,
         map: this.map,
