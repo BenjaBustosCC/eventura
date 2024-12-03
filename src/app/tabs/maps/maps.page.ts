@@ -1,4 +1,5 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {Geolocation, PositionOptions} from "@capacitor/geolocation";
 /// <reference types="@types/google.maps" />
 
 @Component({
@@ -7,31 +8,25 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./maps.page.scss'],
 })
 export class MapsPage implements OnInit {
-  @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
-  map: google.maps.Map | undefined;
+
+  location:any = {};
+  keys:string[]=[];
+
 
   constructor() {}
 
   ngOnInit() {
-    this.loadMap();
+    Geolocation.requestPermissions();
   }
-
-  loadMap() {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&libraries=places`;
-    script.async = true;
-    script.defer = true;
-  
-    script.onload = () => {
-      const mapOptions = {
-        center: { lat: -33.4489, lng: -70.6693 }, // Coordenadas de ejemplo
-        zoom: 14,
-      };
-  
-      this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
-    };
-  
-    document.head.appendChild(script);
+  getPosition(){
+    var options:PositionOptions={
+      enableHighAccuracy:true
+    }
+    Geolocation.getCurrentPosition(options).then((res)=>{
+        this.location =res.coords;
+        this.keys= Object.keys(this.location);
+    },(err)=>{
+      alert(JSON.stringify(err));
+    })
   }
-  
 }
