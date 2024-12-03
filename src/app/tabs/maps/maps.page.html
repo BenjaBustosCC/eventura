@@ -1,15 +1,10 @@
 <ion-content>
   <div class="map-container">
-    <ion-button class="btnGeolocalization" (click)="getPosition()">Tu estas aquí</ion-button>
-  </div>
-
-  <div *ngIf="location.latitude && location.longitude">
-    <p><strong>Latitud:</strong> {{ location.latitude }}</p>
-    <p><strong>Longitud:</strong> {{ location.longitude }}</p>
-  </div>
-
-  <div *ngIf="keys.length === 0">
-    <p>No se ha obtenido la ubicación aún. Presiona el botón para intentarlo.</p>
+    <!--mapa de google-->
+    <div id="map"></div>
+    <ion-button class="floating-button" (click)="getPosition()">
+      <ion-icon name="pin"></ion-icon>
+    </ion-button>
   </div>
 </ion-content>
 
