@@ -8,19 +8,17 @@
       </ion-col>
       <ion-col>
         <h1 style="margin-top: 10px; color: black;">
-          Nuevo evento
+          Editar evento
         </h1>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card>
-  </ion-card>
 </ion-header>
 
 <ion-content style="margin-top: 4vh;">
   <ion-card class="image-card" style="text-align: center;">
     <ion-card-content>
-      <!--Imagen de Evento: Mostrar imagen seleccionada-->
+      <!-- Imagen de Evento: Mostrar imagen existente o seleccionada -->
       <div class="image-upload-container">
         <input type="file" (change)="onImageSelected($event)" style="display: none;" #fileInput>
         <ion-icon class="AddPicture" name="add-outline" style="font-size: 40px;" (click)="fileInput.click()"></ion-icon>
@@ -33,14 +31,19 @@
   
   <ion-item>
     <ion-label position="stacked">Título</ion-label>
-    <ion-input placeholder="Título del evento" [(ngModel)]="eventName"></ion-input>
+    <ion-input 
+      placeholder="Título del evento (dejar vacío para mantener actual)"
+      [(ngModel)]="eventName">
+    </ion-input>
   </ion-item>
-
+  
   <ion-item>
     <ion-label position="stacked">Descripción</ion-label>
-    <ion-textarea placeholder="Descripción del evento" [(ngModel)]="eventDescription"></ion-textarea>
+    <ion-textarea 
+      placeholder="Descripción del evento (dejar vacío para mantener actual)"
+      [(ngModel)]="eventDescription">
+    </ion-textarea>
   </ion-item>
-
   <ion-list lines="full">
     <ion-item>
       <ion-icon class="event-icon" slot="start" name="location-outline"></ion-icon>
@@ -62,7 +65,6 @@
   </ion-list>
 
   <div class="btn-container">
-    <ion-button class="btnUpload" (click)="saveEvent()">Subir</ion-button>
+    <ion-button class="btnUpload" (click)="updateEvent()">Actualizar</ion-button>
   </div>
-
 </ion-content>

@@ -3,6 +3,22 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+<div class="ProfilePicture">
+
+    <!--se ve la imagen que ponga-->
+    <ion-avatar>
+      <img 
+        [src]="profileImage"
+        [alt]="profileImage ? 'Imagen de perfil' : 'Imagen predeterminada' " 
+      />
+    </ion-avatar>
+
+    <!--btn del cambio de imagen-->
+    <ion-button class="btnCambioPerfil" shape="round" expand="block" (click)="addProfilePicture()">
+      <ion-icon class="btnEditFotoPerfil"  name="create"></ion-icon>
+    </ion-button>
+  </div>
+
   <div class="input-container">
     <ion-list>
       <ion-item>
