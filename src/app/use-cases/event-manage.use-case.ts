@@ -8,11 +8,17 @@ import { getAuth } from 'firebase/auth';
 export interface Event {
   id?: string; // ID opcional
   nombre: string;
-  descripcion: string;
-  imagen: string;
-  userId: string;
-  createdAt: any; // Puede ser `Date` o `firebase.firestore.Timestamp`
-}
+    descripcion: string;
+    imagen: string;
+    ubicacion: string;
+    coordenadas: {
+      lat: number;
+      lng: number;
+    };
+    fecha: Date;
+    userId: string;
+    createdAt: Date;
+  }
 
 @Injectable({
   providedIn: 'root',

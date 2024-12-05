@@ -3,7 +3,7 @@
     <ion-button shape="round" (click)="onBackButtonPressed()">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <img [src]="event?.imagen" alt="{{ event?.nombre }}" style="width: 100%;" />
+    <img *ngIf="event?.imagen" [src]="event?.imagen" alt="{{ event?.nombre }}" style="width: 100%;" />
   </div>
 
   <ion-card-header>
@@ -15,18 +15,14 @@
   <ion-card-content>
     <ion-item>
       <ion-icon class="event-icon" name="location-outline" slot="start"></ion-icon>
+      <ion-label>{{ event?.ubicacion }}</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-icon class="event-icon" name="calendar-outline" slot="start"></ion-icon>
-      <ion-label>06 de Septiembre 2024</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon class="event-icon" name="time-outline" slot="start"></ion-icon>
-      <ion-label>17:00 a 20:00 hrs</ion-label>
+      <ion-label>{{ event?.fecha | date:'dd MMMM yyyy, HH:mm' }}</ion-label>
     </ion-item>
 
     <ion-label>{{ event?.descripcion }}</ion-label>
   </ion-card-content>
-  
+</ion-content>

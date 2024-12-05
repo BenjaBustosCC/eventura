@@ -24,10 +24,11 @@ export class EventReadUseCase {
       .valueChanges()
       .pipe(
         map((event) => {
-          // Si el evento no existe, devolver null
+          console.log('Evento recuperado:', event); // Verifica que el evento esté llegando correctamente
           return event ? event : null;
         })
       );
   }
+  
 }
 

@@ -1,49 +1,60 @@
 import { Storage } from '@ionic/storage-angular';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class StorageService {
+  private _storage: Storage | null = null;
 
-    private _storage: Storage | null = null
+  constructor(private storage: Storage) {
+    this.init();
+  }
 
-    constructor(private storage: Storage) {
-        this.init()
+  private async init(): Promise<void> {
+    this._storage = await this.storage.create();
+  }
+
+  private async ensureInitialized(): Promise<void> {
+    if (!this._storage) {
+      await this.init();
     }
+  }
 
-    async init() {
-        const storage = await this.storage.create()
-        this._storage = storage
+  public async set<T>(key: string, value: T): Promise<void> {
+    await this.ensureInitialized();
+    try {
+      await this._storage?.set(key, value);
+    } catch (error) {
+      console.error(`Error al guardar la clave "${key}":`, error);
     }
+  }
 
-    public async set(key: string, value: any): Promise<any> {
-        if (!this._storage) {
-            await this._storage
-        }
-        return this._storage?.set(key, value)
+  public async get<T>(key: string): Promise<T | null> {
+    await this.ensureInitialized();
+    try {
+      return (await this._storage?.get(key)) || null;
+    } catch (error) {
+      console.error(`Error al obtener la clave "${key}":`, error);
+      return null;
     }
+  }
 
-    public async get(key: string): Promise<any> {
-        if (!this._storage) {
-            await this.init()
-        } 
-        return this._storage?.get(key)
+  public async remove(key: string): Promise<void> {
+    await this.ensureInitialized();
+    try {
+      await this._storage?.remove(key);
+    } catch (error) {
+      console.error(`Error al eliminar la clave "${key}":`, error);
     }
+  }
 
-    public async remove(key: string): Promise<any> {
-        if (!this._storage) {
-            await this.init()
-        }
-        return this._storage?.remove(key)
+  public async clear(): Promise<void> {
+    await this.ensureInitialized();
+    try {
+      await this._storage?.clear();
+    } catch (error) {
+      console.error('Error al limpiar el almacenamiento:', error);
     }
-
-    public async clear(): Promise<void> {
-        if (!this._storage) {
-            await this.init()
-        }
-        return this._storage?.clear()
-    }
-
+  }
 }

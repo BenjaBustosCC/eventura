@@ -9,32 +9,25 @@ import { StorageService } from 'src/managers/StorageService';
 })
 export class SplashPage implements OnInit {
 
-  constructor(private router: Router,
-              private storageService: StorageService) { }
+  constructor(
+    private router: Router,
+    private storageService: StorageService
+  ) {}
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.router.navigate(['/login']);  
-    }, 3000)
+  async ngOnInit() {
+    // Llama directamente a checkSession en ngOnInit
+    await this.checkSession();
   }
-}
 
-//esto no funciona :(
-//  async ionViewDidEnter(){
-//    this.checkSession()
-//  }
-//
-//  async checkSession(){
-//    const user = await this.storageService.get('user');
-//    if (user){
-//      setTimeout(()=>{
-//        this.router.navigate(['/home']);
-//      }, 4000)
-//    } else {
-//      setTimeout(() =>{
-//        this.router.navigate(['/login']);
-//      }, 4000)
-//    }
-//  }
-//}
-  
+  async checkSession() {
+    const user = await this.storageService.get('user');
+    if (user) {
+      setTimeout(() => {
+        this.router.navigate(['/tabs/home']); // Redirigir al tab correspondiente
+      }, 4000);
+    } else {
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 4000);
+    }
+  }}

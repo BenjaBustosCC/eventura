@@ -7,14 +7,11 @@
         </ion-button>
       </ion-col>
       <ion-col>
-        <h1 style="margin-top: 10px; color: black;">
-          Nuevo evento
-        </h1>
+        <h1 style="margin-top: 10px; color: black;">Nuevo evento</h1>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card>
-  </ion-card>
+  <ion-card></ion-card>
 </ion-header>
 
 <ion-content style="margin-top: 4vh;">
@@ -30,7 +27,7 @@
       </div>
     </ion-card-content>
   </ion-card>
-  
+
   <ion-item>
     <ion-label position="stacked">Título</ion-label>
     <ion-input placeholder="Título del evento" [(ngModel)]="eventName"></ion-input>
@@ -41,26 +38,30 @@
     <ion-textarea placeholder="Descripción del evento" [(ngModel)]="eventDescription"></ion-textarea>
   </ion-item>
 
-  <ion-list lines="full">
-    <ion-item>
-      <ion-icon class="event-icon" slot="start" name="location-outline"></ion-icon>
-      <ion-label>Agregar una ubicación</ion-label>
-      <ion-icon class="ArrowAddEvent" slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
+  <!-- Campo para la ubicación -->
+<ion-item>
+  <ion-label position="stacked">Ubicación</ion-label>
+  <ion-input
+    type="text"
+    [(ngModel)]="eventLocation"
+    (input)="onLocationInput($event)"
+    placeholder="Escribe una dirección"
+  ></ion-input>
+</ion-item>
 
-    <ion-item>
-      <ion-icon class="event-icon" slot="start" name="calendar-outline"></ion-icon>
-      <ion-label>Agregar una fecha</ion-label>
-      <ion-icon class="ArrowAddEvent" slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
+<ion-list *ngIf="locationSuggestions.length > 0">
+  <ion-item *ngFor="let suggestion of locationSuggestions" (click)="selectLocation(suggestion)">
+    <ion-label>{{ suggestion.description }}</ion-label>
+  </ion-item>
+</ion-list>
+  <!-- Campo para la fecha -->
+  <ion-item>
+    <ion-icon class="event-icon" slot="start" name="calendar-outline"></ion-icon>
+    <ion-label position="stacked">Fecha y hora del evento</ion-label>
+    <ion-datetime [(ngModel)]="eventDate" name="eventDate" display-format="MM/DD/YYYY HH:mm" placeholder="Selecciona una fecha y hora"></ion-datetime>
+  </ion-item>
 
-    <ion-item>
-      <ion-icon class="event-icon" slot="start" name="time-outline"></ion-icon>
-      <ion-label>Agregar un horario</ion-label>
-      <ion-icon class="ArrowAddEvent"  slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-  </ion-list>
-
+  <!-- Botón de subida -->
   <div class="btn-container">
     <ion-button class="btnUpload" (click)="saveEvent()">Subir</ion-button>
   </div>
