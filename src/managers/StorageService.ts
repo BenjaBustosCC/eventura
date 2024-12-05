@@ -57,4 +57,16 @@ export class StorageService {
       console.error('Error al limpiar el almacenamiento:', error);
     }
   }
+
+  /**
+   * Cierra sesión limpiando todo el almacenamiento local.
+   */
+  public async logout(): Promise<void> {
+    try {
+      console.log('Cerrando sesión y limpiando almacenamiento...');
+      await this.clear(); // Limpiar todo el almacenamiento
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  }
 }

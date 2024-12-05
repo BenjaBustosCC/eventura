@@ -128,13 +128,17 @@ export class ProfilePage implements OnInit {
       'Cerrar sesión',
       '¿Estás seguro de que quieres cerrar sesión?',
       async () => {
-        this.logoutUseCase.performLogout();
-        this.router.navigate(['/splash']);
+        try {
+          await this.storageService.logout(); // Limpia el almacenamiento local
+          this.router.navigate(['/splash']); // Redirige a la pantalla de splash o login
+          console.log('Sesión cerrada correctamente.');
+        } catch (error) {
+          console.error('Error al cerrar sesión:', error);
+        }
       },
       () => { }
     );
   }
-
   onUpdatePasswordPressed() {
 
     this.router.navigate(['/pw-update']) 
